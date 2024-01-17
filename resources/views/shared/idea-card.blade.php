@@ -23,7 +23,7 @@
     </div>
     <div class="card-body">
         @if ($editing ?? false)
-            <form action="{{route('idea.update', $idea->id)}}" method="post">
+            <form action="{{route('idea.update', $idea->id)}}" method="">
 
                 @method('put')
                 <div class="mb-3">
