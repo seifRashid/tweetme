@@ -24,7 +24,7 @@
     <div class="card-body">
         @if ($editing ?? false)
             <form action="{{route('idea.update', $idea->id)}}" method="post">
-                @csrf
+
                 @method('put')
                 <div class="mb-3">
                     <textarea name="content" class="form-control" id="content" rows="3">{{$idea->content}}</textarea>
