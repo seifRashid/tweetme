@@ -9,14 +9,14 @@ class IdeaController extends Controller
 {
 
     public function show(Idea $idea) {
-        return view('ideas.show', ['content' => $idea]);
+        return view('ideas.show', compact('idea'));
     }
 
     public function edit(Idea $idea) {
 
         $editing = true;
 
-        return view('ideas.show', ['idea' => $idea]);
+        return view('ideas.show', compact('idea', 'editing'));
     }
 
     public function update(Idea $idea) {
@@ -28,7 +28,7 @@ class IdeaController extends Controller
         $idea->content = request()->get('content','');
         $idea->save();
 
-        return redirect()->route('ideas.show', $idea->id)->with('success','Your Idea was edited succe');
+        return redirect()->route('dashboard', $idea->id)->with('success','Your Idea was edited succe');
     }
 
     public function store()

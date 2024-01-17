@@ -10,10 +10,10 @@
                 </div>
             </div>
             <div>
-                <form action="{{ route('ideas.destroy',$idea->id) }}" method="POST">
+                <form method="POST" action="{{ route('ideas.destroy',$idea->id) }}" >
                     @csrf
                     @method('delete')
-                    <a href="{{ route('idea.show',$idea->id) }}" style="margin-right:10px">Edit</a>
+                    <a href="{{ route('idea.edit',$idea->id) }}" style="margin-right:10px">Edit</a>
                     <a href="{{ route('idea.show',$idea->id) }}" style="margin-right:10px">View</a>
                     <button class="btn btn-danger btn-sm">Delete</button>
                 </form>
@@ -23,8 +23,8 @@
     </div>
     <div class="card-body">
         @if ($editing ?? false)
-            <form action="{{route('idea.update', $idea->id)}}" method="">
-
+            <form action="{{route('idea.update', $idea->id)}}" method="POST">
+                @csrf
                 @method('put')
                 <div class="mb-3">
                     <textarea name="content" class="form-control" id="content" rows="3">{{$idea->content}}</textarea>
