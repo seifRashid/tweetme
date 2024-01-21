@@ -16,7 +16,7 @@ class DashboardController extends Controller
 
         if(request()->has('search'))
         {
-            $ideas = Idea::where('search','like','%' . request()->get('search','') .'%');
+            $ideas = $ideas->where('content','like','%' . request()->get('search',' ') .'%');
         }
 
         return view("dashboard", [
