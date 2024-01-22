@@ -38,6 +38,11 @@ Route::post('/idea/{idea}/comments', [CommentController::class, 'store'])->name(
 //Authentication
 Route::get('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/register', [AuthController::class, 'store']);
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+//Login
+Route::get('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/login', [AuthController::class, 'authenticate']);
 
 //Profile page
 Route::get('/profile', [ProfileController::class,'profile']);
