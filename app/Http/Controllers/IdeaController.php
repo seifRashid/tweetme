@@ -36,11 +36,16 @@ class IdeaController extends Controller
             'content'=> 'required|min:3|max:240'
         ]);
 
-        $idea = Idea:: create(
-            $validated
-            // [ 'content' => request()->get('content','') ]
-            // request()->all()
-        );
+        $validated['user_id'] = auth()->id();
+
+        //store the idea in the database
+        Idea::create($validated);
+
+        // $idea = Idea:: create(
+        //     $validated
+        //     // [ 'content' => request()->get('content','') ]
+        //     // request()->all()
+        // );
 
         return redirect()->route('dashboard')->with('success','Idea created successfuly');
     }
