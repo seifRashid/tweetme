@@ -7,19 +7,10 @@
             @include('shared.left-side-bar')
             <div class="col-6">
                 @include('shared.success')
-                @include('shared.submit-idea')
-                <hr>
-
-                @forelse ($ideas as $idea )
                 <div class="mt-3">
-                    @include('shared.userCard')
+                    @include('shared.idea-card')
                 </div>
-                @empty
-                    <div class="text-center my-3">No results found😒😪 " {{ request()->search }} " is not available anywhere</div>
-                @endforelse
-                <div style="margin-top:10px;">
-                    {{$ideas->withQueryString()->links()}}
-                </div>
+
 
 
             </div>

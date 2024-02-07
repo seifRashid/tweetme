@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\IdeaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TermsController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,30 +23,33 @@ use Illuminate\Support\Facades\Route;
 //Home page
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
-Route::post('/idea', [IdeaController::class, 'store'])->name('idea.create');
+Route::group(['prefix'=>'idea/', 'as' => 'idea.'], function()
+{
+    Route::post('', [IdeaController::class, 'store'])->name('store');
 
-Route::get('/idea{idea}', [IdeaController::class, 'show'])->name('idea.show');
+    // Route::get('{idea}', [IdeaController::class, 'show'])->name('show');
 
-Route::get('/idea{idea}/edit', [IdeaController::class, 'edit'])->name('idea.edit')->middleware('auth');
-
-Route::put('/idea{idea}', [IdeaController::class, 'update'])->name('idea.update')->middleware('auth');
-
-Route::delete('/ideas{idea}', [IdeaController::class, 'destroy'])->name('ideas.destroy')->middleware('auth');
-
-Route::post('/idea/{idea}/comments', [CommentController::class, 'store'])->name('idea.comments.store');
+    Route::group(['middleware' => ['auth']], function(){
 
 
-//Authentication
-Route::get('/register', [AuthController::class, 'register'])->name('register');
-Route::post('/register', [AuthController::class, 'store']);
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+        // Route::get('{idea}/edit', [IdeaController::class, 'edit'])->name('edit');
 
-//Login
-Route::get('/login', [AuthController::class, 'login'])->name('login');
-Route::post('/login', [AuthController::class, 'authenticate']);
+        // Route::put('{idea}', [IdeaController::class, 'update'])->name('update');
 
+        // Route::delete('{idea}', [IdeaController::class, 'destroy'])->name('destroy');
+
+        Route::post('{idea}/comments', [CommentController::class, 'store'])->name('comments.store');
+    });
+});
+
+Route::resource('idea', IdeaController::class)->except(['index','create','show'])->middleware(['auth']);
+
+Route::resource('idea', IdeaController::class)->only(['show']);
 //Profile page
 Route::get('/profile', [ProfileController::class,'profile']);
+
+//profile
+Route::resource('users', UserController::class)->only(['show','edit', 'update'])->middleware(['auth']);
 
 //Terms and conditon page
 Route::get('/terms', [TermsController::class,'terms']);

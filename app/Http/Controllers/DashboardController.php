@@ -20,7 +20,7 @@ class DashboardController extends Controller
         }
 
         return view("dashboard", [
-            "ideas"=> $ideas->paginate(20)
+            "ideas"=> $ideas->paginate(2)
         ]);
     }
 }
