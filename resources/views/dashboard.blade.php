@@ -12,7 +12,7 @@
 
                 @forelse ($ideas as $idea )
                 <div class="mt-3">
-                    @include('shared.userCard')
+                    @include('shared.idea-card')
                 </div>
                 @empty
                     <div class="text-center my-3">No results found😒😪 " {{ request()->search }} " is not available anywhere</div>

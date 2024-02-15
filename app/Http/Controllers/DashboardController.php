@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Idea;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    public function index()
+    public function index(User $user)
     {
         // $idea = Idea:: create(
         //     [ 'content' => request()->get('idea','') ]
@@ -19,7 +20,7 @@ class DashboardController extends Controller
             $ideas = $ideas->where('content','like','%' . request()->get('search',' ') .'%');
         }
 
-        return view("dashboard", [
+        return view("dashboard", compact('user'), [
             "ideas"=> $ideas->paginate(2)
         ]);
     }
