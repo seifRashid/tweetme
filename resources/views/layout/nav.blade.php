@@ -18,7 +18,7 @@ data-bs-theme="dark">
             @endguest
             @auth
                 <li class="nav-item">
-                    <a class="nav-link" href="/profile">{{ Auth::user()->name }}</a>
+                    <a class="nav-link" href="{{ route('profile') }}">{{ Auth::user()->name }}</a>
                 </li>
                 <form action="{{ route('logout') }}" method="post">
                     @csrf

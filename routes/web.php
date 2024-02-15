@@ -46,7 +46,7 @@ Route::resource('idea', IdeaController::class)->except(['index','create','show']
 
 Route::resource('idea', IdeaController::class)->only(['show']);
 //Profile page
-Route::get('/profile', [ProfileController::class,'profile']);
+Route::get('/profile', [UserController::class,'profile'])->middleware('auth')->name('profile');
 
 //profile
 Route::resource('users', UserController::class)->only(['show','edit', 'update'])->middleware(['auth']);
