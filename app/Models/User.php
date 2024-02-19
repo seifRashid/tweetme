@@ -55,5 +55,23 @@ class User extends Authenticatable
         return $this->hasMany(Comment::class)->latest();
     }
 
+    public function following()
+    {
+         return $this->belongsToMany(User::class, 'follow_user','follower_id','user_id')->withTimestamps();
+    }
+
+    public function followers()
+    {
+        return $this->belongsToMany(User::class, 'follow_user','user_id','follower_id')->withTimestamps();
+    }
+
+    public function getImageURL(){
+        if($this->image){
+            return url('storage/'.$this->image);
+        }
+        else{
+            return "https://api.dicebear.com/6.x/fun-emoji/svg?seed={{ $this->name }}";
+        }
+    }
 
 }

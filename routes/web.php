@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FollowerController;
 use App\Http\Controllers\IdeaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TermsController;
@@ -50,6 +51,10 @@ Route::get('/profile', [UserController::class,'profile'])->middleware('auth')->n
 
 //profile
 Route::resource('users', UserController::class)->only(['show','edit', 'update'])->middleware(['auth']);
+
+//follow button
+Route::post('users/{user-id}/follow',[FollowerController::class ,'follow'])->middleware(['auth'])->name('users.follow');
+Route::post('users/{user-id}/unfollow',[FollowerController::class ,'unfollow'])->middleware(['auth'])->name('users.unfollow');
 
 //Terms and conditon page
 Route::get('/terms', [TermsController::class,'terms']);
