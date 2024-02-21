@@ -54,6 +54,7 @@ Route::resource('users', UserController::class)->only(['show','edit', 'update'])
 
 //follow button
 Route::post('users/{user-id}/follow',[FollowerController::class ,'follow'])->middleware(['auth'])->name('users.follow');
+
 Route::post('users/{user-id}/unfollow',[FollowerController::class ,'unfollow'])->middleware(['auth'])->name('users.unfollow');
 
 //Terms and conditon page
