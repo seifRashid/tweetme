@@ -20,7 +20,7 @@ class FollowerController extends Controller
         $follower = auth()->user();
         $follower->followings()->detach($user);//to remove new record in database we use the detach method
 
-        return redirect()->route('users.show',$user->id)->with('success', 'followed successfuly');
+        return redirect()->route('users.show',$user->id)->with('success', 'unfollowed successfuly');
 
     }
 }
