@@ -13,7 +13,7 @@ class DashboardController extends Controller
         // $idea = Idea:: create(
         //     [ 'content' => request()->get('idea','') ]
         // );
-        $ideas = Idea::orderBy('created_at','desc');
+        $ideas = Idea::with('user','comments.user')->orderBy('created_at','desc');
 
         if(request()->has('search'))
         {
@@ -21,7 +21,7 @@ class DashboardController extends Controller
         }
 
         return view("dashboard", compact('user'), [
-            "ideas"=> $ideas->paginate(2)
+            "ideas"=> $ideas->paginate(5)
         ]);
     }
 }

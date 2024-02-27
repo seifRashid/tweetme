@@ -7,12 +7,12 @@
             @include('shared.left-side-bar')
             <div class="col-6">
                 @include('shared.success')
-                @include('shared.submit-idea')
+                @include('ideas.shared.submit-idea')
                 <hr>
 
                 @forelse ($ideas as $idea )
                 <div class="mt-3">
-                    @include('shared.idea-card')
+                    @include('ideas.shared.idea-card')
                 </div>
                 @empty
                     <div class="text-center my-3">No results found😒😪 " {{ request()->search }} " is not available anywhere</div>
