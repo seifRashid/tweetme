@@ -51,7 +51,8 @@ Route::resource('idea', IdeaController::class)->only(['show']);
 Route::get('/profile', [UserController::class,'profile'])->middleware('auth')->name('profile');
 
 //profile
-Route::resource('users', UserController::class)->only(['show','edit', 'update'])->middleware(['auth']);
+Route::resource('users', UserController::class)->only(['show']);
+Route::resource('users', UserController::class)->only(['edit', 'update'])->middleware(['auth']);
 
 //follow button
 Route::post('users/{user}/follow',[FollowerController::class ,'follow'])->middleware(['auth'])->name('users.follow');
